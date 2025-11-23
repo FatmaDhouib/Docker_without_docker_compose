@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db-container:
+    build: ./database
+    image: contacts-db
+    container_name: db-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: contactsdb
+    networks:
+      - contacts-network
+    volumes:
+      - db-data:/var/lib/mysql
+    restart: unless-stopped
+
+  frontend-container:
+    build: ./frontend
+    image: contacts-frontend
+    container_name: frontend-container
+    ports:
+      - "3000:3000"
+    networks:
+      - contacts-network
+    depends_on:
+      - db-container
+    restart: unless-stopped
+
+networks:
+  contacts-network:
+    driver: bridge
+
+volumes:
+  db-data:

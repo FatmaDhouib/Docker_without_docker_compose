@@ -1,0 +1,43 @@
+1. Combien de commandes avez-vous dû exécuter pour lancer l'application complète ?
+Environ 6 commandes principales :
+
+2 pour construire les images (docker build)
+1 pour créer le réseau (docker network create)
+2 pour lancer les conteneurs (docker run)
+1 pour vérifier (docker ps ou docker exec)
+
+2. Qu'arrive-t-il si vous redémarrez votre machine ?
+
+Les conteneurs ne redémarrent pas automatiquement.
+Il faut relancer d'abord la base de données, puis le frontend.
+
+3. Comment gérer les dépendances entre conteneurs ?
+
+Le frontend doit attendre que la base soit prête.
+Sans Docker Compose, vous devez manuellement attendre quelques secondes ou vérifier que le conteneur DB est opérationnel avant de lancer le frontend.
+
+
+4. Que se passe-t-il si vous devez partager ce projet avec un collègue ?
+
+Fournir :
+
+Les Dockerfiles
+Le code source
+Les commandes à exécuter et les instructions pour créer le réseau et lancer les conteneurs(README.md).
+
+
+
+
+5. Comment gérer les volumes pour la persistance des données ?
+
+Ajouter l’option -v lors du docker run pour monter un volume :
+Cela permet de conserver les données même si le conteneur est supprimé.
+
+
+6. Listez toutes les difficultés rencontrées :
+
+Beaucoup de commandes à retenir.
+Gestion manuelle du réseau.
+Dépendance entre conteneurs (ordre de démarrage).
+Pas de persistance sans volumes.
+Configuration des variables d’environnement.
